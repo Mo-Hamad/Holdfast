@@ -141,3 +141,28 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Electron build output
+out/
+release/
+*.exe
+*.dmg
+*.AppImage
+*.deb
+
+# Local app data (SQLite, identity)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+identity.dat
+hold-*.dat
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
