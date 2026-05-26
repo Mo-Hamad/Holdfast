@@ -11,31 +11,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Backgrounds, lightest to darkest moving outward from chat content.
-        base: '#1a1b1e',        // page background (rail + sidebar wash)
-        surface: '#25262b',      // sidebars, panels
-        elevated: '#2f3035',     // chat area, message hover
-        overlay: '#3a3b40',      // modals, popovers
-        border: '#3a3b40',       // subtle dividers
+        // Backgrounds — warm dark wood tones
+        base: '#1c1710',         // page background (darkest, like charred wood)
+        surface: '#252019',      // sidebars, panels
+        elevated: '#2e2a1d',     // chat area, message hover
+        overlay: '#3a3425',      // modals, popovers
+        border: '#3d3828',       // subtle warm dividers
 
-        // Text
-        primary: '#e3e4e6',      // main text
-        secondary: '#a8a9ad',    // metadata, timestamps
-        muted: '#6e6f73',        // placeholders, disabled
+        // Text — warm parchment tones
+        primary: '#f0e6d0',      // main text
+        secondary: '#b8a888',    // metadata, timestamps
+        muted: '#7a6a50',        // placeholders, disabled
 
-        // Accent (indigo)
+        // Accent (amber / gold)
         accent: {
-          DEFAULT: '#6366f1',
-          hover: '#818cf8',
-          muted: '#4f46e5',
+          DEFAULT: '#c8922a',
+          hover: '#e0a83a',
+          muted: '#a07020',
         },
 
         // Status
-        online: '#22c55e',
-        idle: '#eab308',
-        offline: '#6e6f73',
-        danger: '#ef4444',
-        success: '#10b981',
+        online: '#5db847',
+        idle: '#e0a83a',
+        offline: '#7a6a50',
+        danger: '#d94f3a',
+        success: '#5db847',
       },
       fontFamily: {
         sans: [
@@ -65,8 +65,7 @@ export default {
         xl: ['1.25rem', { lineHeight: '1.75rem' }],
       },
       spacing: {
-        // Sidebar widths
-        rail: '4.5rem',      // 72px — hold rail
+        rail: '4rem',        // 64px — top rail height
         sidebar: '15rem',    // 240px — channel + member sidebars
       },
     },

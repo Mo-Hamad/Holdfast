@@ -67,6 +67,8 @@ interface Actions {
   joinHoldByInvite(url: string): Promise<Hold>;
   sendMessage(content: string): Promise<void>;
   setDisplayName(name: string): Promise<void>;
+  createChannel(holdId: HoldId, name: string): Promise<Channel>;
+  generateInvite(holdId: HoldId): Promise<string>;
 
   // Internal — wired by subscriptions
   _onMessage(m: Message): void;
@@ -180,6 +182,21 @@ export const useStore = create<State & Actions>((set, get) => ({
   async setDisplayName(name) {
     const user = await getClient().setDisplayName(name);
     set({ currentUser: user });
+  },
+
+  async createChannel(holdId, name) {
+    const channel = await getClient().createChannel(holdId, name);
+    set((s) => ({
+      channelsByHold: {
+        ...s.channelsByHold,
+        [holdId]: [...(s.channelsByHold[holdId] ?? []), channel],
+      },
+    }));
+    return channel;
+  },
+
+  async generateInvite(holdId) {
+    return getClient().generateInvite(holdId);
   },
 
   // ─── Event handlers ─────────────────────────────────────────────────────

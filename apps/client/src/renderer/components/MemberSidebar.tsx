@@ -1,6 +1,11 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useStore, selectCurrentMembers } from '../state/store.ts';
 
+interface Props {
+  collapsed: boolean;
+  onToggle: () => void;
+}
+
 // Pick a consistent avatar color based on the user's ID.
 // Same user always gets the same color across sessions.
 function avatarColor(userId: string): string {
@@ -12,10 +17,24 @@ function avatarColor(userId: string): string {
   return colors[sum % colors.length]!;
 }
 
-export default function MemberSidebar() {
+export default function MemberSidebar({ collapsed, onToggle }: Props) {
   const members = useStore(useShallow(selectCurrentMembers));
   const presenceByUser = useStore((s) => s.presenceByUser);
   const currentHoldId = useStore((s) => s.currentHoldId);
+
+  if (collapsed) {
+    return (
+      <div className="w-6 bg-surface flex-shrink-0 flex flex-col items-center pt-3">
+        <button
+          onClick={onToggle}
+          title="Expand members"
+          className="text-muted hover:text-primary transition-colors text-xs"
+        >
+          ◀
+        </button>
+      </div>
+    );
+  }
 
   if (!currentHoldId) {
     return (
@@ -29,10 +48,17 @@ export default function MemberSidebar() {
     <div className="w-sidebar bg-surface flex-shrink-0 flex flex-col">
 
       {/* Header */}
-      <div className="px-4 py-3 border-b border-border">
+      <div className="px-4 py-3 border-b border-border flex items-center justify-between">
         <h2 className="text-muted text-xs uppercase font-semibold tracking-wide">
           Members — {members.length}
         </h2>
+        <button
+          onClick={onToggle}
+          title="Collapse members"
+          className="text-muted hover:text-primary transition-colors text-xs"
+        >
+          ▶
+        </button>
       </div>
 
       {/* Member list */}

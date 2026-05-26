@@ -297,6 +297,16 @@ export class MockHoldClient implements IHoldClient {
     return this.channels.get(holdId) ?? [];
   }
 
+  async createChannel(holdId: HoldId, name: string): Promise<Channel> {
+    await sleep(latency());
+    const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || 'channel';
+    const channel = this.mkChannel(holdId, slug, name);
+    const existing = this.channels.get(holdId) ?? [];
+    this.channels.set(holdId, [...existing, channel]);
+    this.messages.set(channel.id, []);
+    return channel;
+  }
+
   async listMembers(holdId: HoldId): Promise<Member[]> {
     await sleep(latency());
     return this.members.get(holdId) ?? [];

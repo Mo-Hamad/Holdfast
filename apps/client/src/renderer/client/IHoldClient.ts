@@ -58,6 +58,7 @@ export interface IHoldClient {
 
   // ─── Channels ─────────────────────────────────────────────────────────
   listChannels(holdId: HoldId): Promise<Channel[]>;
+  createChannel(holdId: HoldId, name: string): Promise<Channel>;
 
   // ─── Members ──────────────────────────────────────────────────────────
   listMembers(holdId: HoldId): Promise<Member[]>;
